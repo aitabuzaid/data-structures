@@ -45,4 +45,6 @@ public interface List<E> { // List class ADT
 
 	// Tell if the list is empty or not
 	public boolean isEmpty();
+	
+	public boolean swap();
 }

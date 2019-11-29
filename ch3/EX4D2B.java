@@ -22,5 +22,4 @@ public class EX4D2B {
 		list.insert(12);
 		System.out.println(list);
 	}
-
 }

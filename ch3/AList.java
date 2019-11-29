@@ -95,4 +95,14 @@ class AList<E> implements List<E> {
 	public boolean isEmpty() {
 		return listSize == 0;
 	}
+	
+	public boolean swap() {
+		if (curr < 0 || curr >= listSize-1)
+			return false;
+		E elem = this.remove();
+		this.next();
+		this.insert(elem);
+		this.prev();
+		return true;
+	}
 }
