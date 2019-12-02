@@ -105,4 +105,6 @@ class AList<E> implements List<E> {
 		this.prev();
 		return true;
 	}
+	
+	
 }

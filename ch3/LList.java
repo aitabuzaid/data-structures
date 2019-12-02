@@ -5,6 +5,7 @@ class LList<E> implements List<E> {
 	private Link<E> head;      // Pointer to list header
 	private Link<E> tail;      // Pointer to last element
 	private Link<E> curr;      // Access to current element
+	private Link<E> temp;
 	private int listSize;      // Size of list
 
 	// Constructors
@@ -116,4 +117,15 @@ class LList<E> implements List<E> {
 	}
 	
 	public boolean swap() {return false;}
+	
+	public LList<E> reverse() {
+		this.moveToStart();
+		LList<E> llist = new LList<E>(this.length());
+		temp = head.next();
+		while (temp.next() != null){
+			llist.insert(temp.element());
+			temp = temp.next();
+		}
+		return llist;
+	}
 }
