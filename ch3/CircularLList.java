@@ -24,7 +24,10 @@ class CircularLList<E> implements List<E> {
 	public boolean insert(E it) {
 		curr.setNext(new Link<E>(curr.element(), curr.next()));
 		curr.setElement(it);
-		if (tail == curr) tail = curr.next();  // New tail
+		if (tail == curr) {
+			tail = curr.next();  // New tail
+			tail.setNext(head);
+		}
 		listSize++;
 		return true;
 	}
@@ -34,6 +37,7 @@ class CircularLList<E> implements List<E> {
 		tail.setNext(new Link<E>(null));
 		tail.setElement(it);
 		tail = tail.next();
+		tail.setNext(head);
 		listSize++;
 		return true;
 	}
@@ -43,7 +47,10 @@ class CircularLList<E> implements List<E> {
 		if (curr == tail) return null;          // Nothing to remove
 		E it = curr.element();                  // Remember value
 		curr.setElement(curr.next().element()); // Pull forward the next element
-		if (curr.next() == tail) tail = curr;   // Removed last, move tail
+		if (curr.next() == tail) {
+			tail = curr;   // Removed last, move tail
+			tail.setNext(head);
+		}
 		curr.setNext(curr.next().next());       // Point around unneeded link
 		listSize--;                             // Decrement element count
 		return it;                              // Return value
