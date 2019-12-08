@@ -11,4 +11,5 @@ interface BinNode { // Binary tree node ADT
 
 	// return TRUE if a leaf node, FALSE otherwise
 	public boolean isLeaf();
+	
 }

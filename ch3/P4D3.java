@@ -32,14 +32,16 @@ public class P4D3 {
 		while (!intList1.isEmpty() || !intList2.isEmpty()) {
 			int1 = intList1.removeLast();
 			int2 = intList2.removeLast();
-			resList.addFirst(int1 + int2 + carrier);;
+			resList.addFirst((int1 + int2 + carrier)%10);;
 			if (int1+int2+carrier >= 10)
 				carrier = 1;
 			else
-				carrier = 0;
-			
-			
+				carrier = 0;	
 		}
+		
+		if (carrier == 1)
+			resList.addFirst(carrier);
+		
 		return resList;
 	}
 }

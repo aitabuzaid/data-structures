@@ -31,4 +31,21 @@ class BSTNode implements BinNode {
 
 	// return TRUE if a leaf node, FALSE otherwise
 	public boolean isLeaf() { return (left == null) && (right == null); }
+	
+	/**
+	 * A recursive function that increments by one
+	 * the value for every node in the binary tree pointed 
+	 * at by root, then returns the modified tree. 
+	 * Assume that nodes store integer values.
+	 * @param root
+	 * @return
+	 */
+	public BSTNode BTinc(BSTNode root)
+	{
+	    if (root == null) return null;
+	    root.setValue((int)root.value()+1);
+	    root.left = BTinc(root.left()); 
+	    root.right = BTinc(root.right());
+	    return root;
+	}
 }
