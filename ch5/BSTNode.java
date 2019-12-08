@@ -48,4 +48,20 @@ class BSTNode implements BinNode {
 	    root.right = BTinc(root.right());
 	    return root;
 	}
+	
+	/*
+	 * A recursive function to set the value for 
+	 * each node in a binary tree to be its depth 
+	 * then return the modified tree. Assume that 
+	 * nodes store integer values. On the initial 
+	 * call to BTsetdepth, depth is 0.
+	 */
+	public BSTNode BTsetdepth(BSTNode root, int depth)
+	{
+	    if (root == null) return null;
+	    root.setValue(depth);
+	    root.left = BTsetdepth(root.left, depth+1);
+	    root.right = BTsetdepth(root.right, depth+1);
+		return root;
+	}
 }
