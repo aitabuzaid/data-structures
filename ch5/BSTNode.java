@@ -64,4 +64,27 @@ class BSTNode implements BinNode {
 	    root.right = BTsetdepth(root.right, depth+1);
 		return root;
 	}
+	
+	/*
+	 * Given a binary tree, check if the tree satisfies
+	 * the property that for each node, the sum of the
+	 * values of its left and right children are equal
+	 * to the node's value. If a node has only one child,
+	 * then the node should have the same value as that child.
+	 * Leaf nodes automatically satisfy the property.
+	 */
+	public boolean BTchecksum(BSTNode root)
+	{
+		if (root == null) return true;
+		if (root.isLeaf()) return true;
+		boolean result;
+		if (root.left == null) {
+			result = (int)root.value() == (int)root.right.value();
+		}
+		else if (root.right == null) {
+			result = (int)root.value() == (int)root.left.value();
+		}
+		else result = (int)root.value() == ((int)root.left.value() + (int)root.right.value());
+	    return result && BTchecksum(root.left) && BTchecksum(root.right);
+	}
 }
