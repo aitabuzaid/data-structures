@@ -27,8 +27,17 @@ public class P4D3 {
 	
 	public static LinkedList<Integer> add(LinkedList<Integer> intList1, LinkedList<Integer> intList2) {
 		LinkedList<Integer> resList = new LinkedList<Integer>();
-		
+		int carrier = 0;
+		int int1, int2;
 		while (!intList1.isEmpty() || !intList2.isEmpty()) {
+			int1 = intList1.removeLast();
+			int2 = intList2.removeLast();
+			resList.addFirst(int1 + int2 + carrier);;
+			if (int1+int2+carrier >= 10)
+				carrier = 1;
+			else
+				carrier = 0;
+			
 			
 		}
 		return resList;
