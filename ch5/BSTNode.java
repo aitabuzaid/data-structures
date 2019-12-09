@@ -126,7 +126,7 @@ class BSTNode implements BinNode {
 	
 	/*
 	 * A recursive function to find the height of
-	 * the binary tree pointed at by root.
+	 * the binary tree pointed at by root
 	 */
 	public int BTheight(BSTNode root)
 	{
@@ -134,4 +134,38 @@ class BSTNode implements BinNode {
 	    return 1 + Math.max(BTheight(root.left), BTheight(root.right));
 	}
 
+	
+	/*
+	 * A recursive function that returns the difference 
+	 * between the sum of all node values at odd levels 
+	 * and sum of all node values at even levels.
+	 * The root node is at level 1.
+	 */
+	public int BTgetdiff(BSTNode root)
+	{
+		int level = 0;
+		int[] result = BTgetdiff(root, level);
+	    return result[1]-result[0];
+	}
+	
+	public int[] BTgetdiff(BSTNode root, int level)
+	{
+		
+		int[] sum = {0, 0}, temp1, temp2;
+		if (root == null) return sum;
+		level++;
+		temp1 = BTgetdiff(root.right, level);
+		temp2 = BTgetdiff(root.left, level);
+		
+		if (level % 2 == 0) {
+			sum[0] = (int)root.value()+temp1[0]+temp2[0];
+			sum[1] = temp1[1]+temp2[1];
+		}
+		else {
+			sum[0] = temp1[0]+temp2[0];
+			sum[1] = (int)root.value()+temp1[1]+temp2[1];
+		}
+			
+	    return sum;
+	}
 }
