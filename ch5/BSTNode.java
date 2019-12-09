@@ -123,4 +123,15 @@ class BSTNode implements BinNode {
 				BTcheckval(root.left, value) ||
 				BTcheckval(root.right, value);
 	}
+	
+	/*
+	 * A recursive function to find the height of
+	 * the binary tree pointed at by root.
+	 */
+	public int BTheight(BSTNode root)
+	{
+	    if (root == null) return 0;
+	    return 1 + Math.max(BTheight(root.left), BTheight(root.right));
+	}
+
 }
