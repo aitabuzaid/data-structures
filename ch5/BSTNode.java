@@ -98,4 +98,15 @@ class BSTNode implements BinNode {
 		if (root.isLeaf()) return 1;
 		return BTleaf(root.left) + BTleaf(root.right);
 	}
+	
+	/*
+	 * A recursive function that returns the sum of 
+	 * the values for all of the nodes of the binary
+	 * tree by passing the root
+	 */
+	public int BTsumall(BSTNode root)
+	{
+		if (root == null) return 0;
+	    return (int)root.value()+BTsumall(root.left)+BTsumall(root.right);
+	}
 }
