@@ -87,4 +87,15 @@ class BSTNode implements BinNode {
 		else result = (int)root.value() == ((int)root.left.value() + (int)root.right.value());
 	    return result && BTchecksum(root.left) && BTchecksum(root.right);
 	}
+	
+	/*
+	 * A recursive function to count the number of 
+	 * leaf nodes in the binary tree pointed at by root. 
+	 */
+	public int BTleaf(BSTNode root)
+	{
+	    if (root == null) return 0;
+		if (root.isLeaf()) return 1;
+		return BTleaf(root.left) + BTleaf(root.right);
+	}
 }
