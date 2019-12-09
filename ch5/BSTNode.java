@@ -109,4 +109,18 @@ class BSTNode implements BinNode {
 		if (root == null) return 0;
 	    return (int)root.value()+BTsumall(root.left)+BTsumall(root.right);
 	}
+	
+	/*
+	 * A recursive function that returns true if 
+	 * there is a node in the given binary tree 
+	 * with the given value, and false otherwise. 
+	 * Note that this tree is not a Binary Search Tree.
+	 */
+	public boolean BTcheckval(BSTNode root, int value)
+	{
+	    if (root == null) return false;
+		return (int)root.value()==value || 
+				BTcheckval(root.left, value) ||
+				BTcheckval(root.right, value);
+	}
 }
