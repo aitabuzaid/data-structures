@@ -19,14 +19,35 @@ public class AVLTree {
 		nodecount++;
 	}
 	
-	private BSTNode inserthelp(BSTNode rt, Comparable e) {
-		if (rt == null) return new BSTNode(e);
-		if (rt.value().compareTo(e) >= 0)
-			rt.setLeft(inserthelp(rt.left(), e));
+	private BSTNode inserthelp(BSTNode root, Comparable e) {
+		if (root == null) return new BSTNode(e);
+		if (root.value().compareTo(e) >= 0)
+			root.setLeft(inserthelp(root.left(), e));
 		else
-			rt.setRight(inserthelp(rt.right(), e));
+			root.setRight(inserthelp(root.right(), e));
 		
-		return rt;	
+		if (root.left() == null && root.right() == null)
+			root.setHeight(-1);
+		else
+			root.setHeight(Math.max(height(root.left()),height(root.right()))+1);
+		
+		
+		if ((height(root.left()) - height(root.right())) > 1)
+			if ((height(root.left().left())-height(root.left().right()))>0)
+				return rightRotate(root);
+			else {
+				root.setLeft(leftRotate(root.left()));
+				return rightRotate(root);
+			}
+		else if ((height(root.left()) - height(root.right())) < -1)
+			if ((height(root.right().left())-height(root.right().right()))<0)
+				return leftRotate(root);
+			else {
+				root.setRight(rightRotate(root.right()));
+				return leftRotate(root);
+			}		
+		
+		return root;	
 	}
 	
 	private BSTNode leftRotate(BSTNode root) {
@@ -37,7 +58,7 @@ public class AVLTree {
 		
 		root.setHeight(Math.max(height(root.left()),
 				height(root.right()))+1);
-		root.setHeight(Math.max(height(rightNode.left()),
+		rightNode.setHeight(Math.max(height(rightNode.left()),
 				height(rightNode.right()))+1);
 		
 		return rightNode;
@@ -51,7 +72,7 @@ public class AVLTree {
 		
 		root.setHeight(Math.max(height(root.left()),
 				height(root.right()))+1);
-		root.setHeight(Math.max(height(leftNode.left()),
+		leftNode.setHeight(Math.max(height(leftNode.left()),
 				height(leftNode.right()))+1);
 		
 		return leftNode;
@@ -86,57 +107,58 @@ public class AVLTree {
 	
 	public int height(BSTNode root)
 	{
+		if (root == null) return 0;
 		return root.getHeight();
 	}
 	
 	
-	private Comparable findhelp(BSTNode rt, Comparable key){
-		if (rt == null) return null;
-		if (rt.value().compareTo(key) > 0)
-			return findhelp(rt.left(), key);
-		else if (rt.value().compareTo(key) == 0)
-			return rt.value();
-		else return findhelp(rt.right(), key);
+	private Comparable findhelp(BSTNode root, Comparable key){
+		if (root == null) return null;
+		if (root.value().compareTo(key) > 0)
+			return findhelp(root.left(), key);
+		else if (root.value().compareTo(key) == 0)
+			return root.value();
+		else return findhelp(root.right(), key);
 	}
 
 	
 
-	private BSTNode removehelp(BSTNode rt, Comparable key) {
-		if (rt == null) return null;
-		if (rt.value().compareTo(key) > 0)
-			rt.setLeft(removehelp(rt.left(), key));
-		else if (rt.value().compareTo(key) < 0)
-			rt.setRight(removehelp(rt.right(), key));
+	private BSTNode removehelp(BSTNode root, Comparable key) {
+		if (root == null) return null;
+		if (root.value().compareTo(key) > 0)
+			root.setLeft(removehelp(root.left(), key));
+		else if (root.value().compareTo(key) < 0)
+			root.setRight(removehelp(root.right(), key));
 		else {
-			if (rt.left() == null) return rt.right();
-			else if (rt.right() == null) return rt.left();
+			if (root.left() == null) return root.right();
+			else if (root.right() == null) return root.left();
 			else {
-				BSTNode temp = getmax(rt.left());
-				rt.setValue(temp.value());
-				rt.setLeft(deletemax(rt.left()));
+				BSTNode temp = getmax(root.left());
+				root.setValue(temp.value());
+				root.setLeft(deletemax(root.left()));
 			}
 		}
-		return rt;
+		return root;
 	}
 
 	// Get the maximum valued element in a subtree
-	private BSTNode getmax(BSTNode rt) {
-		if (rt.right() == null) return rt;
-		return getmax(rt.right());
+	private BSTNode getmax(BSTNode root) {
+		if (root.right() == null) return root;
+		return getmax(root.right());
 	}
 
-	private BSTNode deletemax(BSTNode rt) {
-		if (rt.right() == null) return rt.left();
-		rt.setRight(deletemax(rt.right()));
-		return rt;
+	private BSTNode deletemax(BSTNode root) {
+		if (root.right() == null) return root.left();
+		root.setRight(deletemax(root.right()));
+		return root;
 	}
 
 	
-	private void printhelp(BSTNode rt) {
-		if (rt == null) return;
-		printhelp(rt.left());
-		printVisit(rt);
-		printhelp(rt.right());
+	private void printhelp(BSTNode root) {
+		if (root == null) return;
+		printhelp(root.left());
+		printVisit(root);
+		printhelp(root.right());
 	}
 	private void printVisit(BSTNode node) {
 		System.out.print(" "+node.value()+" height:"+
