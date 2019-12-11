@@ -28,6 +28,34 @@ public class AVLTree {
 		
 		return rt;	
 	}
+	
+	private BSTNode leftRotate(BSTNode root) {
+		if (root == null) return root;
+		BSTNode rightNode = root.right();
+		root.setRight(rightNode.left());
+		rightNode.setLeft(root);
+		
+		root.setHeight(Math.max(height(root.left()),
+				height(root.right()))+1);
+		root.setHeight(Math.max(height(rightNode.left()),
+				height(rightNode.right()))+1);
+		
+		return rightNode;
+	}
+	
+	private BSTNode rightRotate(BSTNode root) {
+		if (root == null) return root;
+		BSTNode leftNode = root.left();
+		root.setLeft(leftNode.right());
+		leftNode.setRight(root);
+		
+		root.setHeight(Math.max(height(root.left()),
+				height(root.right()))+1);
+		root.setHeight(Math.max(height(leftNode.left()),
+				height(leftNode.right()))+1);
+		
+		return leftNode;
+	}
 
 	// Remove a record from the tree
 	// key: The key value of record to remove
