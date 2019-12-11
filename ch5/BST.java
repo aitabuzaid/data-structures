@@ -42,6 +42,16 @@ public class BST {
 		printhelp(root);
 	}
 	
+	public int height() {
+		return height(root);
+	}
+	
+	private int height(BSTNode root)
+	{
+		if (root == null) return 0;
+	    return 1 + Math.max(height(root.left()), height(root.right()));
+	}
+	
 	
 	private Comparable findhelp(BSTNode rt, Comparable key){
 		if (rt == null) return null;
