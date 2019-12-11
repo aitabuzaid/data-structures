@@ -5,10 +5,14 @@ class BSTNode implements BinNode {
 	private Comparable element; // Element for this node
 	private BSTNode left;          // Pointer to left child
 	private BSTNode right;         // Pointer to right child
-
+	private int height;
+	
 	// Constructors
 	BSTNode() {left = right = null; }
-	BSTNode(Comparable val) { left = right = null; element = val; }
+	BSTNode(Comparable val) { 
+		left = right = null;
+		element = val;
+		this.height = 1;}
 	BSTNode(Comparable val, BSTNode l, BSTNode r)
 	{ left = l; right = r; element = val; }
 
@@ -32,6 +36,13 @@ class BSTNode implements BinNode {
 	// return TRUE if a leaf node, FALSE otherwise
 	public boolean isLeaf() { return (left == null) && (right == null); }
 	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
 	/**
 	 * A recursive function that increments by one
 	 * the value for every node in the binary tree pointed 

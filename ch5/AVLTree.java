@@ -18,6 +18,16 @@ public class AVLTree {
 		root = inserthelp(root, e);
 		nodecount++;
 	}
+	
+	private BSTNode inserthelp(BSTNode rt, Comparable e) {
+		if (rt == null) return new BSTNode(e);
+		if (rt.value().compareTo(e) >= 0)
+			rt.setLeft(inserthelp(rt.left(), e));
+		else
+			rt.setRight(inserthelp(rt.right(), e));
+		
+		return rt;	
+	}
 
 	// Remove a record from the tree
 	// key: The key value of record to remove
@@ -46,10 +56,9 @@ public class AVLTree {
 		return height(root);
 	}
 	
-	private int height(BSTNode root)
+	public int height(BSTNode root)
 	{
-		if (root == null) return 0;
-	    return 1 + Math.max(height(root.left()), height(root.right()));
+		return root.getHeight();
 	}
 	
 	
@@ -62,14 +71,7 @@ public class AVLTree {
 		else return findhelp(rt.right(), key);
 	}
 
-	private BSTNode inserthelp(BSTNode rt, Comparable e) {
-		if (rt == null) return new BSTNode(e);
-		if (rt.value().compareTo(e) >= 0)
-			rt.setLeft(inserthelp(rt.left(), e));
-		else
-			rt.setRight(inserthelp(rt.right(), e));
-		return rt;	
-	}
+	
 
 	private BSTNode removehelp(BSTNode rt, Comparable key) {
 		if (rt == null) return null;
@@ -105,11 +107,12 @@ public class AVLTree {
 	private void printhelp(BSTNode rt) {
 		if (rt == null) return;
 		printhelp(rt.left());
-		printVisit(rt.value());
+		printVisit(rt);
 		printhelp(rt.right());
 	}
-	private void printVisit(Comparable value) {
-		System.out.print(" "+value+" ");
+	private void printVisit(BSTNode node) {
+		System.out.print(" "+node.value()+" height:"+
+	node.getHeight());
 	}
 
 }
