@@ -1,9 +1,13 @@
 package ch5;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 //Binary Search Tree implementation
 public class AVLTree {
 	private BSTNode root; // Root of the BST
 	private int nodecount; // Number of nodes in the BST
+	private int iter = -1;
 
 	// constructor
 	AVLTree() { root = null; nodecount = 0; }
@@ -82,7 +86,7 @@ public class AVLTree {
 	// key: The key value of record to remove
 	// Returns the record removed, null if there is none.
 	public Comparable remove(Comparable key) {
-		Comparable temp = findhelp(root, key); // First find it
+		Comparable temp = findhelp(root, key, 0); // First find it
 		if (temp != null) {
 			root = removehelp(root, key); // Now remove it
 			nodecount--;
@@ -92,7 +96,23 @@ public class AVLTree {
 
 	// Return the record with key value k, null if none exists
 	// key: The key value to find
-	public Comparable find(Comparable key) { return findhelp(root, key); }
+	public Comparable find(Comparable key) { return findhelp(root, key, -1); }
+	
+	private Comparable findhelp(BSTNode root, Comparable key, int iter){
+		if (root == null) {
+			//this.iter = iter;
+			return null;
+		}
+		iter++;
+		if (root.value().compareTo(key) > 0)
+			return findhelp(root.left(), key, iter);
+		else if (root.value().compareTo(key) == 0) {
+			this.iter = iter;
+			return root.value();
+		}
+			
+		else return findhelp(root.right(), key, iter);
+	}
 
 	// Return the number of records in the dictionary
 	public int size() { return nodecount; }
@@ -111,18 +131,6 @@ public class AVLTree {
 		return root.getHeight();
 	}
 	
-	
-	private Comparable findhelp(BSTNode root, Comparable key){
-		if (root == null) return null;
-		if (root.value().compareTo(key) > 0)
-			return findhelp(root.left(), key);
-		else if (root.value().compareTo(key) == 0)
-			return root.value();
-		else return findhelp(root.right(), key);
-	}
-
-	
-
 	private BSTNode removehelp(BSTNode root, Comparable key) {
 		if (root == null) return null;
 		if (root.value().compareTo(key) > 0)
@@ -163,6 +171,29 @@ public class AVLTree {
 	private void printVisit(BSTNode node) {
 		System.out.print(" "+node.value()+" height:"+
 	node.getHeight());
+	}
+	
+	public int getIter(){
+		return this.iter;
+	}
+	
+	public void printlevel(){
+		if (root == null) return;
+		BSTNode runner = root;
+		Queue<BSTNode> queue = new LinkedList<BSTNode>();
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			
+			BSTNode temp = queue.remove();
+			if (temp == null) break;
+			System.out.println(temp.value()+ " " + temp.getHeight());
+			
+			if (temp.left() != null)
+				queue.add(temp.left());
+			
+			if (temp.right() != null)
+				queue.add(temp.right());
+		}
 	}
 
 }

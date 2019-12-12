@@ -179,4 +179,37 @@ class BSTNode implements BinNode {
 			
 	    return sum;
 	}
+	
+	
+	/*
+	 * A "root-to-leaf path" is any sequence of nodes
+	 * in a tree starting with the root node and 
+	 * proceeding downward to a leaf. 
+	 * The "root-to-leaf path sum" for that path is 
+	 * the sum of the values for all the nodes 
+	 * (including the root) along that path. 
+	 * An empty tree contains no root-to-leaf paths 
+	 * (and so its sum is zero). A tree with one node 
+	 * to have a root-to-leaf path consisting of just 
+	 * the root (and so its sum is the value of the root). 
+	 * Given a binary tree and a value sum, return 
+	 * true if the tree has some root-to-leaf path 
+	 * such that adding up all the values along the 
+	 * path equals sum. Return false if no such path 
+	 * exists.
+	 */
+	public boolean BTpathsum(BSTNode root, int sum)
+	{
+		int sumPath = 0;
+	    return BTpathsum(root, sum, sumPath);
+	}
+	
+	public boolean BTpathsum(BSTNode root, int sum, int sumPath)
+	{
+	    if (root == null) return (sum == sumPath);
+	    boolean result = false;
+	    result |= BTpathsum(root.left, sum, sumPath+(int)root.value());
+	    result |= BTpathsum(root.right, sum, sumPath+(int)root.value());
+	    return result;
+	}
 }
