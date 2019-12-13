@@ -248,4 +248,22 @@ class BSTNode implements BinNode {
 		}
 		return result;
 	}
+
+	/*
+	 * Given two binary trees, return true if and only if they are 
+	 * mirror images of each other. Note that two empty trees are 
+	 * considered mirror images.
+	 */
+	public  boolean MBTmirror(BSTNode root1, BSTNode root2)
+	{
+		boolean result = true;
+		if ((root1 == null) && (root2 == null)) return true;
+		else if ((root1 == null) && (root2 != null)) return false;
+		else if ((root1 != null) && (root2 == null)) return false;
+		else {
+			result &= MBTmirror(root1.left(), root2.right());
+			result &= MBTmirror(root1.right(), root2.left());
+		}
+		return result;
+	}
 }
