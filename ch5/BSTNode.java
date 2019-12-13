@@ -212,4 +212,22 @@ class BSTNode implements BinNode {
 	    result |= BTpathsum(root.right, sum, sumPath+(int)root.value());
 	    return result;
 	}
+	
+	/*
+	 * Given two binary trees, returns true if and only if they
+	 * are structurally identical (they have the same shape, 
+	 * but their nodes can have different values).
+	 */
+	public boolean MBTstructure(BSTNode root1, BSTNode root2)
+	{
+		boolean result = true;
+	    if ((root1 == null) && (root2==null)) return true;
+	    else if ((root1 == null) && (root2 != null)) return false;
+	    else if ((root1 != null) && (root2 == null)) return false;
+	    else {
+	    	result &= MBTstructure(root1.left(), root2.left());
+	    	result &= MBTstructure(root1.right(), root2.right());
+	    }
+		return result;
+	}
 }
