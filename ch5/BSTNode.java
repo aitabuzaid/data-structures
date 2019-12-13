@@ -6,7 +6,7 @@ class BSTNode implements BinNode {
 	private BSTNode left;          // Pointer to left child
 	private BSTNode right;         // Pointer to right child
 	private int height;
-	
+
 	// Constructors
 	BSTNode() {left = right = null; }
 	BSTNode(Comparable val) { 
@@ -35,11 +35,11 @@ class BSTNode implements BinNode {
 
 	// return TRUE if a leaf node, FALSE otherwise
 	public boolean isLeaf() { return (left == null) && (right == null); }
-	
+
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
+
 	public int getHeight() {
 		return this.height;
 	}
@@ -53,13 +53,13 @@ class BSTNode implements BinNode {
 	 */
 	public BSTNode BTinc(BSTNode root)
 	{
-	    if (root == null) return null;
-	    root.setValue((int)root.value()+1);
-	    root.left = BTinc(root.left()); 
-	    root.right = BTinc(root.right());
-	    return root;
+		if (root == null) return null;
+		root.setValue((int)root.value()+1);
+		root.left = BTinc(root.left()); 
+		root.right = BTinc(root.right());
+		return root;
 	}
-	
+
 	/*
 	 * A recursive function to set the value for 
 	 * each node in a binary tree to be its depth 
@@ -69,13 +69,13 @@ class BSTNode implements BinNode {
 	 */
 	public BSTNode BTsetdepth(BSTNode root, int depth)
 	{
-	    if (root == null) return null;
-	    root.setValue(depth);
-	    root.left = BTsetdepth(root.left, depth+1);
-	    root.right = BTsetdepth(root.right, depth+1);
+		if (root == null) return null;
+		root.setValue(depth);
+		root.left = BTsetdepth(root.left, depth+1);
+		root.right = BTsetdepth(root.right, depth+1);
 		return root;
 	}
-	
+
 	/*
 	 * Given a binary tree, check if the tree satisfies
 	 * the property that for each node, the sum of the
@@ -96,20 +96,20 @@ class BSTNode implements BinNode {
 			result = (int)root.value() == (int)root.left.value();
 		}
 		else result = (int)root.value() == ((int)root.left.value() + (int)root.right.value());
-	    return result && BTchecksum(root.left) && BTchecksum(root.right);
+		return result && BTchecksum(root.left) && BTchecksum(root.right);
 	}
-	
+
 	/*
 	 * A recursive function to count the number of 
 	 * leaf nodes in the binary tree pointed at by root. 
 	 */
 	public int BTleaf(BSTNode root)
 	{
-	    if (root == null) return 0;
+		if (root == null) return 0;
 		if (root.isLeaf()) return 1;
 		return BTleaf(root.left) + BTleaf(root.right);
 	}
-	
+
 	/*
 	 * A recursive function that returns the sum of 
 	 * the values for all of the nodes of the binary
@@ -118,9 +118,9 @@ class BSTNode implements BinNode {
 	public int BTsumall(BSTNode root)
 	{
 		if (root == null) return 0;
-	    return (int)root.value()+BTsumall(root.left)+BTsumall(root.right);
+		return (int)root.value()+BTsumall(root.left)+BTsumall(root.right);
 	}
-	
+
 	/*
 	 * A recursive function that returns true if 
 	 * there is a node in the given binary tree 
@@ -129,23 +129,23 @@ class BSTNode implements BinNode {
 	 */
 	public boolean BTcheckval(BSTNode root, int value)
 	{
-	    if (root == null) return false;
+		if (root == null) return false;
 		return (int)root.value()==value || 
 				BTcheckval(root.left, value) ||
 				BTcheckval(root.right, value);
 	}
-	
+
 	/*
 	 * A recursive function to find the height of
 	 * the binary tree pointed at by root
 	 */
 	public int BTheight(BSTNode root)
 	{
-	    if (root == null) return 0;
-	    return 1 + Math.max(BTheight(root.left), BTheight(root.right));
+		if (root == null) return 0;
+		return 1 + Math.max(BTheight(root.left), BTheight(root.right));
 	}
 
-	
+
 	/*
 	 * A recursive function that returns the difference 
 	 * between the sum of all node values at odd levels 
@@ -156,18 +156,18 @@ class BSTNode implements BinNode {
 	{
 		int level = 0;
 		int[] result = BTgetdiff(root, level);
-	    return result[1]-result[0];
+		return result[1]-result[0];
 	}
-	
+
 	public int[] BTgetdiff(BSTNode root, int level)
 	{
-		
+
 		int[] sum = {0, 0}, temp1, temp2;
 		if (root == null) return sum;
 		level++;
 		temp1 = BTgetdiff(root.right, level);
 		temp2 = BTgetdiff(root.left, level);
-		
+
 		if (level % 2 == 0) {
 			sum[0] = (int)root.value()+temp1[0]+temp2[0];
 			sum[1] = temp1[1]+temp2[1];
@@ -176,11 +176,11 @@ class BSTNode implements BinNode {
 			sum[0] = temp1[0]+temp2[0];
 			sum[1] = (int)root.value()+temp1[1]+temp2[1];
 		}
-			
-	    return sum;
+
+		return sum;
 	}
-	
-	
+
+
 	/*
 	 * A "root-to-leaf path" is any sequence of nodes
 	 * in a tree starting with the root node and 
@@ -201,18 +201,18 @@ class BSTNode implements BinNode {
 	public boolean BTpathsum(BSTNode root, int sum)
 	{
 		int sumPath = 0;
-	    return BTpathsum(root, sum, sumPath);
+		return BTpathsum(root, sum, sumPath);
 	}
-	
+
 	public boolean BTpathsum(BSTNode root, int sum, int sumPath)
 	{
-	    if (root == null) return (sum == sumPath);
-	    boolean result = false;
-	    result |= BTpathsum(root.left, sum, sumPath+(int)root.value());
-	    result |= BTpathsum(root.right, sum, sumPath+(int)root.value());
-	    return result;
+		if (root == null) return (sum == sumPath);
+		boolean result = false;
+		result |= BTpathsum(root.left, sum, sumPath+(int)root.value());
+		result |= BTpathsum(root.right, sum, sumPath+(int)root.value());
+		return result;
 	}
-	
+
 	/*
 	 * Given two binary trees, returns true if and only if they
 	 * are structurally identical (they have the same shape, 
@@ -221,13 +221,31 @@ class BSTNode implements BinNode {
 	public boolean MBTstructure(BSTNode root1, BSTNode root2)
 	{
 		boolean result = true;
-	    if ((root1 == null) && (root2==null)) return true;
-	    else if ((root1 == null) && (root2 != null)) return false;
-	    else if ((root1 != null) && (root2 == null)) return false;
-	    else {
-	    	result &= MBTstructure(root1.left(), root2.left());
-	    	result &= MBTstructure(root1.right(), root2.right());
-	    }
+		if ((root1 == null) && (root2 == null)) return true;
+		else if ((root1 == null) && (root2 != null)) return false;
+		else if ((root1 != null) && (root2 == null)) return false;
+		else {
+			result &= MBTstructure(root1.left(), root2.left());
+			result &= MBTstructure(root1.right(), root2.right());
+		}
+		return result;
+	}
+
+	/*
+	 * Given two binary trees, return true if they are identical 
+	 * (they have nodes with the same values, arranged in the same way).
+	 */
+	public  boolean MBTsame(BSTNode root1, BSTNode root2)
+	{
+		boolean result;
+		if ((root1 == null) && (root2 == null)) return true;
+		else if ((root1 == null) && (root2 != null)) return false;
+		else if ((root1 != null) && (root2 == null)) return false;
+		else {
+			result = root1.value() == root2.value();
+			result &= MBTsame(root1.left(), root2.left());
+			result &= MBTsame(root1.right(), root2.right());
+		}
 		return result;
 	}
 }
