@@ -1,5 +1,9 @@
 package ch5;
 
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 class MaxHeap {
 	private Comparable[] Heap; // Pointer to the heap array
 	private int size;          // Maximum size of the heap
@@ -15,6 +19,8 @@ class MaxHeap {
 		}
 		MaxHeap maxHeap = new MaxHeap(arr, size, size);
 		maxHeap.print();
+
+		maxHeap.printTree();
 
 
 	}
@@ -114,12 +120,52 @@ class MaxHeap {
 		}
 		siftdown(pos); // If it is little, push down
 	}
-	
+
 	void print() {
 		for (int i = 0; i < n; i++) {
 			System.out.print(Heap[i]+" ");
 		}
+		System.out.println();
 	}
+
+	void printTree() {
+		Queue<LinkedList<Integer>> queue = new LinkedList<LinkedList<Integer>>();
+
+		LinkedList<Integer> list = new LinkedList<Integer>(){{add(0); add(0);}};
+
+		queue.add(list);
+		int OldLevel = 0;
+		while (!queue.isEmpty()) {
+			LinkedList<Integer> queueElement = queue.remove();
+			int pos = queueElement.get(0);
+			int level = queueElement.get(1);
+					
+			if (level != OldLevel || pos==0) {
+				String str = "  ";
+				//int i = (int)Math.ceil((Math.log(heapsize())/Math.log(2)));
+				int i = (int) (heapsize()-Math.pow(level, 2))/2;				
+				System.out.println();
+				for (int j = 0; j < i; j++){
+					System.out.print(str);
+				}
+				OldLevel = level;
+			}
+			if (pos >= 0 && pos < n)
+				System.out.print(Heap[pos] + " ");
+
+			if (leftchild(pos) != -1)
+				queue.add(new LinkedList<Integer>(){{add(leftchild(pos)); add(level+1);}});
+			if (rightchild(pos) != -1)
+				queue.add(new LinkedList<Integer>(){{add(rightchild(pos)); add(level+1);}});
+		}
+		System.out.println();
+	}
+
+	/*
+	private void printTree(int pos) {
+		System.out.println(b);
+	}
+	 */
 
 	public static void swap(Comparable[] A, int p1, int p2) {
 		Comparable temp = A[p1];
