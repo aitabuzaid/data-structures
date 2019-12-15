@@ -22,12 +22,12 @@ public class HuffTree implements Comparable {
     else return 1;
   }
   
-  static HuffTree buildTree(MinHeap HHeap) {
+  static HuffTree buildTree(MinHeap Hheap) {
 	  HuffTree tmp1, tmp2, tmp3 = null;
 
 	  while (Hheap.heapsize() > 1) { // While two items left
-	    tmp1 = Hheap.removemin();
-	    tmp2 = Hheap.removemin();
+	    tmp1 = (HuffTree)Hheap.removemin();
+	    tmp2 = (HuffTree)Hheap.removemin();
 	    tmp3 = new HuffTree(tmp1.root(), tmp2.root(),
 	                             tmp1.weight() + tmp2.weight());
 	    Hheap.insert(tmp3);   // Return new tree to heap
