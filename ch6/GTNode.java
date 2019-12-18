@@ -13,5 +13,17 @@ public interface GTNode {
 	public void insertNext(GTNode n);
 	public void removeFirst();
 	public void removeNext();
-}
+	public static void printNode(GTNode n){};
 
+
+	static void postorder(GTNode rt) {
+		if (!rt.isLeaf()) {
+			GTNode temp = rt.leftmostChild();
+			while (temp != null) {
+				postorder(temp);
+				temp = temp.rightSibling();
+			}
+		}
+		printNode(rt);
+	}
+}
