@@ -29,9 +29,10 @@ public interface GTNode {
 	
 	static boolean GTComp(GTNode rt1, GTNode rt2) {
         boolean result = true;
-        if (!rt1.isLeaf() && rt2.isLeaf()) return false;
-        else if (rt1.isLeaf() && !rt2.isLeaf()) return false;
-        else if (rt1.isLeaf() && rt2.isLeaf()) return rt1.value() == rt2.value();
+        if ((!rt1.isLeaf() && rt2.isLeaf()) ||
+        		(rt1.isLeaf() && !rt2.isLeaf())) return false;
+        else if (rt1.isLeaf() && rt2.isLeaf()) 
+        	return rt1.value() == rt2.value();
         else {
             GTNode temp1 = rt1.leftmostChild();
             GTNode temp2 = rt2.leftmostChild();
@@ -40,8 +41,24 @@ public interface GTNode {
                 temp1 = temp1.rightSibling();
                 temp2 = temp2.rightSibling();
             }
-            if ((temp1 == null && temp2 != null) || (temp1 != null && temp2 == null)) return false;
+            if ((temp1 == null && temp2 != null) ||
+            		(temp1 != null && temp2 == null)) return false;
         }
         return result;
+    }
+	
+	static int GTCount(GTNode rt) {
+        int count = 0;
+        if (rt == null) return 0;
+        if (rt.isLeaf()) return 1;
+        else {
+            count++;
+            GTNode temp = rt.leftmostChild();
+            while (temp != null) {
+                count += GTCount(temp);
+                temp = temp.rightSibling();
+            }
+        }
+        return count;
     }
 }
