@@ -55,7 +55,7 @@ public class GTNode {
 				temp = temp.rightSibling();
 			}
 		}
-		printNode(rt);
+		System.out.print(rt.value());
 	}
 	
 	static boolean GTComp(GTNode rt1, GTNode rt2) {
