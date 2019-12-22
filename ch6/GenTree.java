@@ -24,9 +24,12 @@ public class GenTree {
 	}   
 	
 	public void newroot(Object value, GTNode first, GTNode sib) {
+		//this.root.leftmostChild = this.root;
 		this.root = new GTNode(value, first, sib);
 	}
 	public void newleftchild(Object value) {
-		this.root.leftmostChild = new GTNode(value);
+		GTNode temp = new GTNode(value);
+		temp.rightSibling = this.root.leftmostChild;
+		this.root.leftmostChild = temp;
 	}
 }
