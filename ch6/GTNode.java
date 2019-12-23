@@ -5,6 +5,7 @@ package ch6;
 
 public class GTNode {
     private Object value;
+    GTNode parent;
     GTNode leftmostChild, rightSibling;
     GTNode(Object value) {
         this.value = value;
@@ -24,7 +25,9 @@ public class GTNode {
         return this.leftmostChild == null;
     }
 
-    //public GTNode parent();
+    public GTNode parent() {
+    	return this.parent;
+    }
     public GTNode leftmostChild() {
         return this.leftmostChild;
     }
@@ -36,11 +39,24 @@ public class GTNode {
     public void setValue(Object value) {
         this.value = value;
     }
-    //public void setParent(GTNode par);
+    public void setParent(GTNode parent) {
+    	this.parent = parent;
+    }
 
-    //public void insertFirst(GTNode n);
+    public void insertFirst(GTNode n) {
+    	GTNode temp = this.leftmostChild;
+    	this.leftmostChild = n;
+    	this.leftmostChild.rightSibling = temp;    	
+    }
 
-    //public void insertNext(GTNode n);
+    public void insertNext(GTNode n) {
+    	GTNode temp = this.leftmostChild;
+    	while (temp.rightSibling != null) {
+    		temp = temp.rightSibling;
+    	}
+    	temp.rightSibling = n;
+    }
+    
 
     //public void removeFirst();
 
