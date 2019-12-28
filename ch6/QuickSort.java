@@ -36,7 +36,7 @@ public class QuickSort {
 		int pivotIndex = right--;
 		while (left <= right) {
 			while(arr[left].compareTo(arr[pivotIndex]) < 0) left++;
-			System.out.println(left+" "+right);
+			//System.out.println(left+" "+right);
 			while((right >= left) && (arr[right].compareTo(arr[pivotIndex]) >= 0)) right--;
 			if (right > left) swap(arr, left, right);
 		}
