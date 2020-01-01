@@ -4,26 +4,26 @@ public class QuickSortK {
 	public static void main(String[] args) {
 		Integer[] arr = new Integer[20];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (Integer)(int)(Math.random()*20);
+			arr[i] = (Integer)(int)(Math.random()*200);
 			System.out.print(arr[i]+ " ");
 		}
 		System.out.println();
-		quicksort(arr);
+		quicksort(arr, 10);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i]+ " ");
 		}
 	}
 	
-	static void quicksort(Comparable[] arr) {
-		quicksort(arr, 0, arr.length-1);
+	static void quicksort(Comparable[] arr, int k) {
+		quicksort(arr, 0, arr.length-1, k);
 	}
-	static void quicksort(Comparable[] arr, int min, int max) {
+	static void quicksort(Comparable[] arr, int min, int max, int k) {
 		int pivotIndex = (min+max)/2;
 		swap(arr, pivotIndex, max);
 		int p = partition(arr, min, max);
 		swap(arr, p, max);
-		if ((p-min) > 1) quicksort(arr, min, p-1);
-		if ((max-p) > 1) quicksort(arr, p+1, max);
+		if ((p-min) > 1 && min < k) quicksort(arr, min, p-1, k);
+		if ((max-p) > 1 && p < k) quicksort(arr, p+1, max, k);
 	}
 
 	static void swap(Comparable[] arr, int p1, int p2) {
