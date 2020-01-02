@@ -1,5 +1,16 @@
 package ch6;
 
+/**
+ * A new class for the Quicksort algorithm that
+ * only sorts the first k values of an array of
+ * size n, the algorithms checks the minimum and 
+ * the partition values for the subarray before it
+ * calls itself recursively, this ensures that
+ * the algorithm does not do additional processing
+ * once the first k values are sorted
+ * @author Abdulrahman
+ *
+ */
 public class QuickSortK {
 	public static void main(String[] args) {
 		Integer[] arr = new Integer[20];
