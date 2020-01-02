@@ -1,6 +1,20 @@
 package ch6;
 import java.util.*;
 
+/**
+ * Insertion sort algorithm that uses two stacks
+ * other than the input stack, one stack is used
+ * as output and another as a temp. stack to allow
+ * for popped items from the output stack to be 
+ * saved while the next item is inserted in position
+ * The algorithm has O(n^2) complexity since inserting each
+ * item could take require half of the elements in the stack
+ * to be popped and pushed back, and hence, inserting n items
+ * requires n*(n-1) ~ n^2
+ * @author Abdulrahman
+ *
+ */
+
 public class InsSortStack {
 
 	public static void main(String[] args) {
