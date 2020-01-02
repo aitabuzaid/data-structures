@@ -14,12 +14,16 @@ package ch6;
 public class QuickSortK {
 	public static void main(String[] args) {
 		Integer[] arr = new Integer[20];
+		int k = 4;
+		System.out.println("The original array is:");
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = (Integer)(int)(Math.random()*200);
 			System.out.print(arr[i]+ " ");
 		}
-		System.out.println();
-		quicksort(arr, 10);
+		
+		System.out.println("\nThe sorted array for the first "+
+							k+" elements is:");
+		quicksort(arr, k);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i]+ " ");
 		}
