@@ -23,7 +23,9 @@ public class InsSortStack {
 		for (int i = 0; i < 20; i++) {
 			stack.push((int)(Math.random()*50));
 		}
+		System.out.println("Original unsorted stack:");
 		System.out.println(stack);
+		System.out.println("Sorted stack:");
 		System.out.println(InsSortStack.sort(stack));
 	}
 	public static Stack<Comparable> sort(Stack<Comparable> inStack){
@@ -38,9 +40,6 @@ public class InsSortStack {
 			outStack.push(tempItem);
 			while (!tempStack.isEmpty()) outStack.push(tempStack.pop());
 		}
-
-
 		return outStack;
 	}
-
 }
