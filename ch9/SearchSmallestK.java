@@ -1,7 +1,14 @@
 package ch9;
 
 /**
- * 
+ * This class has a method that calculates the kth
+ * smallest value in an unsorted array by borrowing
+ * ideas from the quicksort algorithm, it selects a pivot
+ * and then partitions the array into two, it then calculates
+ * the partition boundary and compares it with the value k
+ * The method calls itself recursively on the part of the array
+ * where k lies, eventually, the algorithm finds the kth smallest
+ * value in the unsorted array.
  * @author Abdulrahman
  *
  */
