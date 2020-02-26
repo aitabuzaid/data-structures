@@ -5,14 +5,14 @@ import java.util.LinkedList;
 public class Graph {
 	private final int V;
 	private int E;
-	private LinkedList<Integer>[] adj;
+	private LinkedList<Edge>[] adj;
 
 	public Graph(int V) {
 		this.V = V;
 		this.E = 0;
 		adj = new LinkedList[V];
 		for (int v = 0; v < V; v++) {
-			adj[v] = new LinkedList();
+			adj[v] = new LinkedList<Edge>();
 		}
 	}
 	
@@ -24,13 +24,15 @@ public class Graph {
 		return E;
 	}
 	
-	public void addEdge(int v, int w) {
+	public void addEdge(Edge e) {
 		E++;
-		adj[v].add(w);
-		adj[w].add(v);
+		int v = e.eitherV();
+		int w = e.otherV(v);
+		adj[v].add(e);
+		adj[w].add(e);
 	}
 	
-	public Iterable<Integer> adj(int v) {
+	public Iterable<Edge> adj(int v) {
 		return adj[v];
 	}
 
