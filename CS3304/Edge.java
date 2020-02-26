@@ -29,5 +29,9 @@ public class Edge implements Comparable<Edge> {
 		return Double.compare(this.weight, that.weight);
 	}
 	
+	public String toString() {
+		return String.format("%d-%d %.2f", v, w, weight);
+	}
+	
 
 }
