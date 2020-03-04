@@ -12,6 +12,7 @@ import java.util.Queue;
  */
 public class PrimMST {
 	
+	// Initializing of variables
 	private boolean[] marked;
 	private Queue<Edge> mst;
 	private PriorityQueue<Edge> pq;
@@ -56,6 +57,7 @@ public class PrimMST {
 				pq.add(e);
 	}
 	
+	// returns an iterable list of edges in MST
 	public Iterable<Edge> mst() {
 		return mst;
 	}
