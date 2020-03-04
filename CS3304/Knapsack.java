@@ -8,23 +8,29 @@ public class Knapsack {
 		int V[]  = { 10, 5, 30, 8, 12, 30, 50, 10, 2, 10, 40, 80, 100, 25, 10, 5};
 		int B = 20;
 		
-		int[][] k = new int[V.length][W.length+1];
+		int[][] k = new int[V.length+1][B+1];
 
 		for (int w = 0; w <= B; w++)
 			k[0][w] = 0;
 
-		for (int i = 0; i < V.length; i++)
+		for (int i = 0; i <= V.length; i++)
 			k[i][0] = 0;
 					
-		for (int i = 0; i < V.length; i++)
+		for (int i = 1; i <= V.length; i++)
 			for (int w = 1; w <= B; w++){
-				if (W[i] <= w)
-					k[i][w] = Math.max(V[i]+k[i-1][w-W[i]], k[i-1][w]);
+				if (W[i-1] <= w)
+					k[i][w] = Math.max(V[i-1]+k[i-1][w-W[i-1]], k[i-1][w]);
 				else
 					k[i][w] = k[i-1][w];
 			}
 		
-		System.out.println(k[V.length-1][W.length]);
+		for (int i = 0; i <= V.length; i++) {
+			for (int w = 0; w <= B; w++){
+				System.out.print(k[i][w]+ "       ");
+			}
+			System.out.println();
+		}
+			
 	}
 
 }
