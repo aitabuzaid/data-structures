@@ -3,9 +3,11 @@ package CS3304;
 public class Knapsack {
 
 	public static void main(String[] args) {
-
+		// initializing arrays for the values and weights of items
 		int W[] = {  1, 4,  6, 2,  5, 10,  8,  3, 9,  1,  4,  2,  5,  8,   9, 1};
 		int V[]  = { 10, 5, 30, 8, 12, 30, 50, 10, 2, 10, 40, 80, 100, 25, 10, 5};
+		
+		// the total size of the knapsack
 		int B = 20;
 		
 		int[][] k = new int[V.length+1][B+1];
